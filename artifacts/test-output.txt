@@ -1,0 +1,13 @@
+Bitcoin Price Prediction Engine — automated verification
+Executed: 2026-08-31
+Command: PYTHONPATH=src python -m pytest tests -q
+
+.............                                                            [100%]
+13 passed in 13.87s
+
+Verified areas:
+- Coinbase response pagination and OHLCV validation
+- Past-only feature generation and leakage invariants
+- Chronological model training and metric contracts
+- Saved runtime artifacts
+- FastAPI health, summary, history, backtest, forecast, model, and feature routes

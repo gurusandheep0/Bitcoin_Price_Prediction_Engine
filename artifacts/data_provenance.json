@@ -1,0 +1,12 @@
+{
+  "source": "Coinbase Exchange API",
+  "product": "BTC-USD",
+  "endpoint": "https://api.exchange.coinbase.com/products/BTC-USD/candles",
+  "granularity_seconds": 86400,
+  "requested_start": "2020-01-01",
+  "requested_end": "2026-08-31",
+  "observed_start": "2020-01-01T00:00:00+00:00",
+  "observed_end": "2026-08-31T00:00:00+00:00",
+  "candles": 2435,
+  "downloaded_at": "2026-08-31T15:00:57.561257+00:00"
+}

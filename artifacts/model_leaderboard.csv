@@ -1,0 +1,5 @@
+model,cv_mae_usd,mae_usd,rmse_usd,mape_percent,r2,directional_accuracy_percent,is_baseline
+persistence_baseline,,1340.47,1867.77,1.5389,0.991142,0.0,True
+elastic_net,1078.86,1357.92,1868.97,1.5605,0.99113,48.02,False
+random_forest,1058.82,1359.95,1888.28,1.5575,0.990946,51.14,False
+hist_gradient_boosting,1187.64,1475.76,2055.83,1.688,0.989268,48.23,False

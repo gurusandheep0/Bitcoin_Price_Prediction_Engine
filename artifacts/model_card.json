@@ -1,0 +1,18 @@
+{
+  "model": "random_forest",
+  "intended_use": "Educational next-day BTC-USD forecasting and time-series evaluation",
+  "not_intended_for": [
+    "autonomous trading",
+    "investment advice",
+    "guaranteed returns"
+  ],
+  "target": "next daily close derived from predicted next-day log return",
+  "validation": "expanding-window TimeSeriesSplit for selection; final chronological holdout for reporting",
+  "trained_through": "2026-08-31",
+  "limitations": [
+    "Historical relationships may not persist",
+    "Daily OHLCV omits order-book, macroeconomic, and on-chain information",
+    "The uncertainty interval is empirical and not a guarantee",
+    "Exchange data can contain gaps or revisions"
+  ]
+}

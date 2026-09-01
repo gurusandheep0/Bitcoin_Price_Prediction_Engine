@@ -1,0 +1,37 @@
+Bitcoin Price Prediction Engine — verified experiment
+Executed: 2026-08-31
+
+DATA
+Source: Coinbase Exchange API, BTC-USD, daily candles
+Observed range: 2020-01-01 through 2026-08-31
+Candles: 2,435
+Feature-complete labelled rows: 2,404
+Final chronological holdout: 481 rows
+
+MODEL SELECTION
+Selected by expanding-window CV MAE: random_forest
+Selected model CV MAE: $1,058.82
+
+FINAL HOLDOUT
+Persistence baseline MAE: $1,340.47
+Random Forest MAE: $1,359.95
+Random Forest RMSE: $1,888.28
+Random Forest MAPE: 1.5575%
+Random Forest direction agreement: 51.14%
+Relative MAE improvement versus persistence: -1.453%
+Governance state: research_only_baseline_leads
+
+UNCERTAINTY
+Nominal empirical band: 90%
+Observed holdout coverage: 90.02%
+Residual radius: +/- $2,973.18
+
+SAVED RESEARCH FORECAST
+As of: 2026-08-31
+Forecast for: 2026-09-01
+Last close: $78,580.00
+Point forecast: $78,645.09
+Modeled change: +0.0828%
+Range: $75,671.91 to $81,618.26
+
+Research demonstration only. Forecasts are uncertain and are not financial advice.

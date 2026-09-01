@@ -1,0 +1,76 @@
+{
+  "status": "passed",
+  "evidence_type": "historical_backtest",
+  "data": {
+    "source": "Coinbase Exchange public BTC-USD daily candles",
+    "start": "2020-01-01",
+    "end": "2026-08-31",
+    "candles": 2435,
+    "feature_complete_rows": 2404,
+    "holdout_rows": 481
+  },
+  "target": "next daily close derived from predicted next-day log return",
+  "validation": "expanding-window TimeSeriesSplit for selection; final chronological holdout for reporting",
+  "selected_model": "random_forest",
+  "deployment_status": "research_only_baseline_leads",
+  "baseline_improvement_percent": -1.453,
+  "leaderboard": [
+    {
+      "model": "persistence_baseline",
+      "cv_mae_usd": null,
+      "mae_usd": 1340.47,
+      "rmse_usd": 1867.77,
+      "mape_percent": 1.5389,
+      "r2": 0.991142,
+      "directional_accuracy_percent": 0.0,
+      "is_baseline": true
+    },
+    {
+      "model": "elastic_net",
+      "cv_mae_usd": 1078.86,
+      "mae_usd": 1357.92,
+      "rmse_usd": 1868.97,
+      "mape_percent": 1.5605,
+      "r2": 0.99113,
+      "directional_accuracy_percent": 48.02,
+      "is_baseline": false
+    },
+    {
+      "model": "random_forest",
+      "cv_mae_usd": 1058.82,
+      "mae_usd": 1359.95,
+      "rmse_usd": 1888.28,
+      "mape_percent": 1.5575,
+      "r2": 0.990946,
+      "directional_accuracy_percent": 51.14,
+      "is_baseline": false
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "cv_mae_usd": 1187.64,
+      "mae_usd": 1475.76,
+      "rmse_usd": 2055.83,
+      "mape_percent": 1.688,
+      "r2": 0.989268,
+      "directional_accuracy_percent": 48.23,
+      "is_baseline": false
+    }
+  ],
+  "holdout": {
+    "start": "2025-05-08",
+    "end": "2026-08-31",
+    "interval_nominal_percent": 90,
+    "interval_empirical_coverage_percent": 90.02,
+    "interval_radius_usd": 2973.18
+  },
+  "latest_forecast": {
+    "as_of": "2026-08-31",
+    "forecast_for": "2026-09-01",
+    "last_close_usd": 78580.0,
+    "predicted_close_usd": 78645.09,
+    "predicted_change_percent": 0.0828,
+    "interval_low_usd": 75671.91,
+    "interval_high_usd": 81618.26
+  },
+  "risk_notice": "Research demonstration only. Forecasts are uncertain and are not financial advice."
+}

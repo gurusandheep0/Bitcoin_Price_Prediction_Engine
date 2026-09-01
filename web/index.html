@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Leakage-aware Bitcoin price forecasting and historical backtesting lab">
+  <title>BITFORGE//LAB — Bitcoin Forecast Intelligence</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="grain"></div><div class="glow glow-a"></div><div class="glow glow-b"></div>
+  <header>
+    <a class="brand" href="#"><span class="coin">₿</span><span><b>BITFORGE<i>//</i>LAB</b><small>MARKET FORECAST INTELLIGENCE</small></span></a>
+    <nav><button class="nav active" data-tab="pulse">Market pulse</button><button class="nav" data-tab="backtest">Backtest lab</button><button class="nav" data-tab="method">Methodology</button></nav>
+    <div class="status"><i></i><span><small>ENGINE STATE</small><b id="engine-state">CONNECTING</b></span></div>
+  </header>
+
+  <main>
+    <section class="tab active" id="pulse">
+      <div class="hero">
+        <article class="hero-copy">
+          <p class="eyebrow">BTC-USD / DAILY CLOSE / RESEARCH SYSTEM</p>
+          <h1>Forecast the<br><em>range,</em> not certainty.</h1>
+          <p class="lede">A leakage-aware machine-learning lab for next-day Bitcoin close prediction, chronological backtesting, model comparison, and uncertainty-aware evidence.</p>
+          <div class="notice"><b>RESEARCH ONLY</b><span>Not a trading signal or financial advice.</span></div>
+        </article>
+        <article class="forecast-card panel">
+          <div class="panel-title"><div><p class="eyebrow">NEXT DAILY CLOSE</p><h2 id="forecast-date">Loading…</h2></div><span class="chip" id="selected-model">MODEL</span></div>
+          <div class="forecast-main"><div><small>POINT FORECAST</small><strong id="forecast-price">—</strong><span id="forecast-change">—</span></div><div class="last-close"><small>LAST OBSERVED CLOSE</small><b id="last-close">—</b><span id="as-of">—</span></div></div>
+          <div class="range"><div><i id="range-fill"></i><b id="point-marker"></b></div><p><span><small>LOW</small><b id="range-low">—</b></span><span><small>EMPIRICAL 90% BAND</small><b id="coverage-label">—</b></span><span><small>HIGH</small><b id="range-high">—</b></span></p></div>
+        </article>
+      </div>
+
+      <section class="metric-strip">
+        <article><small>HOLDOUT MAE</small><strong id="metric-mae">—</strong><p>Mean absolute USD error</p><b>01</b></article>
+        <article><small>HOLDOUT RMSE</small><strong id="metric-rmse">—</strong><p>Penalises larger misses</p><b>02</b></article>
+        <article><small>DIRECTION HIT RATE</small><strong id="metric-direction">—</strong><p>Up/down agreement only</p><b>03</b></article>
+        <article><small>INTERVAL COVERAGE</small><strong id="metric-interval">—</strong><p>Observed holdout coverage</p><b>04</b></article>
+      </section>
+
+      <div class="dashboard-grid">
+        <article class="panel chart-panel">
+          <div class="panel-title"><div><p class="eyebrow">MARKET CONTEXT</p><h2>Observed daily close</h2></div><div class="range-buttons"><button data-days="180">6M</button><button class="active" data-days="365">1Y</button><button data-days="730">2Y</button></div></div>
+          <canvas id="history-chart" width="1000" height="390" aria-label="Bitcoin historical close chart"></canvas>
+          <div class="chart-legend"><span><i class="orange"></i>BTC-USD close</span><span id="history-window">—</span></div>
+        </article>
+        <article class="panel market-panel">
+          <div class="panel-title"><div><p class="eyebrow">30-DAY REGIME</p><h2>Market diagnostics</h2></div><span class="pulse-dot"></span></div>
+          <div class="market-metrics"><div><small>RETURN</small><b id="market-return">—</b></div><div><small>ANNUALISED VOL</small><b id="market-vol">—</b></div><div><small>MAX DRAWDOWN</small><b id="market-drawdown">—</b></div><div><small>AVG. DAILY VOLUME</small><b id="market-volume">—</b></div></div>
+          <div class="gate"><small>MODEL GOVERNANCE STATE</small><strong id="deployment-state">—</strong><p id="baseline-note">Loading baseline comparison…</p></div>
+        </article>
+      </div>
+
+      <article class="panel leaderboard">
+        <div class="panel-title"><div><p class="eyebrow">CHRONOLOGICAL HOLDOUT</p><h2>Model scoreboard</h2></div><span class="outline">LOWER ERROR IS BETTER</span></div>
+        <div class="table-wrap"><table><thead><tr><th>Rank</th><th>Model</th><th>MAE</th><th>RMSE</th><th>MAPE</th><th>Direction</th><th>Role</th></tr></thead><tbody id="model-table"></tbody></table></div>
+      </article>
+    </section>
+
+    <section class="tab" id="backtest">
+      <div class="section-intro"><div><p class="eyebrow">OUT-OF-SAMPLE EVIDENCE</p><h1>Backtest lab</h1></div><p>The holdout remains strictly later than the training window. Drag through predictions to inspect the selected model against actual close and the persistence baseline.</p></div>
+      <article class="panel explorer">
+        <div class="panel-title"><div><p class="eyebrow">WALK-FORWARD EXPLORER</p><h2>Prediction versus outcome</h2></div><span class="outline" id="explorer-date">—</span></div>
+        <canvas id="backtest-chart" width="1200" height="440" aria-label="Backtest actual and predicted Bitcoin prices"></canvas>
+        <input id="day-slider" type="range" min="0" max="1" value="0" aria-label="Choose backtest day">
+        <div class="day-cards"><div><small>ACTUAL CLOSE</small><b id="day-actual">—</b></div><div><small>MODEL FORECAST</small><b id="day-predicted">—</b></div><div><small>PERSISTENCE</small><b id="day-baseline">—</b></div><div><small>ABSOLUTE ERROR</small><b id="day-error">—</b></div></div>
+      </article>
+      <div class="backtest-grid">
+        <article class="panel"><div class="panel-title"><div><p class="eyebrow">ERROR CONTROL</p><h2>Why the baseline matters</h2></div></div><p class="body-copy">For a one-day horizon, yesterday's close is a strong baseline. An ML challenger is not treated as deployable merely because it produces a forecast; it must outperform persistence on unseen chronological data.</p><div class="comparison" id="comparison-bars"></div></article>
+        <article class="panel"><div class="panel-title"><div><p class="eyebrow">UNCERTAINTY</p><h2>Empirical prediction band</h2></div></div><p class="body-copy">The displayed range is derived from the 90th percentile of absolute holdout residuals. It describes historical model error—not the probability of future market outcomes.</p><div class="interval-stat"><b id="interval-radius">—</b><span>residual radius</span></div></article>
+      </div>
+    </section>
+
+    <section class="tab" id="method">
+      <div class="section-intro"><div><p class="eyebrow">REPRODUCIBLE FORECAST DESIGN</p><h1>Methodology</h1></div><p>Every feature is available by the current daily close. Candidate selection uses expanding time windows, and the final report uses a later untouched holdout.</p></div>
+      <article class="panel pipeline-panel"><div class="pipeline"><div><span>01</span><small>SOURCE</small><b>Coinbase daily OHLCV</b><p>Paginated public market data</p></div><i>→</i><div><span>02</span><small>FEATURES</small><b>Past-only transformations</b><p>Momentum · volatility · RSI · volume</p></div><i>→</i><div><span>03</span><small>VALIDATION</small><b>Expanding time splits</b><p>No random shuffle or future leakage</p></div><i>→</i><div><span>04</span><small>EVIDENCE</small><b>Untouched final holdout</b><p>Baseline · errors · uncertainty</p></div></div></article>
+      <div class="method-grid">
+        <article class="panel feature-panel"><div class="panel-title"><div><p class="eyebrow">PERMUTATION ANALYSIS</p><h2>Feature influence</h2></div><span class="outline">HOLDOUT</span></div><div id="feature-bars" class="feature-bars"></div></article>
+        <article class="panel guardrail-panel"><div class="panel-title"><div><p class="eyebrow">MODEL BOUNDARY</p><h2>What this system does not claim</h2></div></div><ol><li><b>01</b><p><strong>No guaranteed accuracy</strong><span>Crypto regimes shift and historical relationships can break.</span></p></li><li><b>02</b><p><strong>No trading recommendation</strong><span>The interface deliberately avoids buy, sell, and return promises.</span></p></li><li><b>03</b><p><strong>No random validation</strong><span>Time order is preserved across selection and reporting.</span></p></li><li><b>04</b><p><strong>No hidden source</strong><span>Data provenance and snapshot dates remain visible and reproducible.</span></p></li></ol></article>
+      </div>
+      <article class="panel provenance"><div><p class="eyebrow">DATA PROVENANCE</p><h2 id="data-range">—</h2><p id="validation-method">—</p></div><a href="https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles" rel="noreferrer">Official source documentation ↗</a></article>
+    </section>
+  </main>
+  <footer><span>BITFORGE//LAB</span><p>Historical forecasting research · no financial advice</p><a href="/docs">OpenAPI ↗</a></footer>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
